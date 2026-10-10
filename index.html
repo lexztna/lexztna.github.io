@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LexZTNA — Zero-Trust Network Access for legal workloads</title>
+<meta name="description" content="LexZTNA connects legal teams to case workspaces over an encrypted zero-trust mesh: SSO/MFA with device posture, DNS-layer DLP, least-privilege per-case access. Built by the Parselex team.">
+<link rel="canonical" href="https://lexztna.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LexZTNA">
+<meta property="og:title" content="LexZTNA — Zero-Trust Network Access for legal workloads">
+<meta property="og:description" content="Encrypted device-to-cloud mesh, SSO/MFA with device posture, DNS-layer DLP and least-privilege per-case access. Part of the Parselex platform.">
+<meta property="og:url" content="https://lexztna.com/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LexZTNA — Zero-Trust Network Access for legal workloads">
+<meta name="twitter:description" content="Encrypted zero-trust mesh for legal workloads. Part of the Parselex platform.">
+<meta name="theme-color" content="#0B1220">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1220'/%3E%3Cpath d='M16 5l9 4v7c0 5.2-3.6 9.3-9 11-5.4-1.7-9-5.8-9-11V9l9-4z' fill='none' stroke='%2322D3EE' stroke-width='2'/%3E%3Cpath d='M11.5 16.5l3 3 6-6.5' fill='none' stroke='%2322D3EE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0B1220;--bg2:#101A30;--panel:#13203C;--line:rgba(148,180,220,.14);
+--ink:#E8EEF7;--muted:#8FA3BF;--cyan:#22D3EE;--teal:#2DD4BF;--deep:#061020}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+background:var(--bg);color:var(--ink);line-height:1.6;font-size:15.5px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+section{padding:76px 0}
+.kicker{color:var(--cyan);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+h1{font-size:clamp(30px,4.8vw,56px);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.2vw,34px);line-height:1.2;letter-spacing:-.015em;font-weight:800}
+h3{font-size:16.5px;font-weight:700}
+.lead{color:var(--muted);font-size:17px;max-width:760px;margin-top:14px}
+.head{margin-bottom:38px}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);
+border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.12em;font-size:15px}
+.logo svg{width:26px;height:26px}
+.navlinks{display:flex;gap:20px;margin-left:auto}
+.navlinks a{font-size:13.5px;font-weight:600;color:var(--muted)}
+.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:9px;cursor:pointer;transition:.18s;border:1px solid transparent}
+.btn-cyan{background:var(--cyan);color:#06202A;padding:10px 18px;font-size:13.5px}
+.btn-cyan:hover{background:var(--teal)}
+.btn-ghost{border-color:rgba(34,211,238,.4);color:var(--cyan);padding:12px 22px;font-size:15px}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-line{border-color:var(--line);color:var(--ink);padding:10px 18px;font-size:13.5px;background:transparent}
+.btn-line:hover{border-color:var(--cyan);color:var(--cyan)}
+/* hero */
+.hero{background:
+radial-gradient(900px 460px at 80% -12%,rgba(34,211,238,.16),transparent 62%),
+radial-gradient(760px 420px at 6% 110%,rgba(45,212,191,.10),transparent 60%),
+linear-gradient(165deg,#061020,#0B1220 55%,#0D1930);
+padding:92px 0 70px;border-bottom:1px solid var(--line)}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(34,211,238,.45);color:var(--cyan);
+font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:7px 14px;border-radius:99px;background:rgba(34,211,238,.08)}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(45,212,191,.22)}
+.hero .sub{color:rgba(232,238,247,.78);font-size:18px;max-width:740px;margin-top:20px}
+.hero .ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.hero .note{margin-top:22px;color:rgba(143,163,191,.85);font-size:13px}
+.mesh{margin-top:52px;border:1px solid var(--line);border-radius:14px;background:rgba(6,16,32,.6);padding:26px 26px 18px}
+.mesh svg{width:100%;height:auto;display:block}
+.mesh .cap{color:var(--muted);font-size:12.5px;margin-top:12px;letter-spacing:.05em;text-transform:uppercase}
+/* pillars */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:24px}
+.card p{color:var(--muted);font-size:14.5px;margin-top:10px}
+.ic{width:38px;height:38px;border-radius:9px;background:rgba(34,211,238,.1);display:grid;place-items:center;margin-bottom:14px}
+.ic svg{width:20px;height:20px;stroke:var(--cyan);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{border:1px solid var(--line);border-radius:13px;background:var(--bg2);padding:26px;position:relative}
+.step:before{counter-increment:s;content:"0" counter(s);font-size:13px;font-weight:800;color:var(--cyan);letter-spacing:.14em}
+.step h3{margin-top:10px}
+.step p{color:var(--muted);font-size:14.5px;margin-top:10px}
+/* band */
+.band{border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#0D1930,#13203C);
+padding:44px;text-align:center}
+.band p{color:var(--muted);font-size:16.5px;max-width:620px;margin:14px auto 0}
+.band .ctas{display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+/* footer */
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13.5px}
+footer .cols{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+footer .cols .sp{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+footer a:hover{color:var(--cyan)}
+@media(max-width:900px){.grid3,.steps{grid-template-columns:1fr 1fr}.navlinks{display:none}}
+@media(max-width:620px){.grid3,.grid2,.steps{grid-template-columns:1fr}section{padding:56px 0}.band{padding:30px}}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="/">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0B1220"/><path d="M16 5l9 4v7c0 5.2-3.6 9.3-9 11-5.4-1.7-9-5.8-9-11V9l9-4z" fill="none" stroke="#22D3EE" stroke-width="2"/><path d="M11.5 16.5l3 3 6-6.5" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    LEXZTNA
+  </a>
+  <div class="navlinks">
+    <a href="#pillars">Product</a>
+    <a href="#how">How it works</a>
+    <a href="#platform">Platform</a>
+  </div>
+  <a class="btn btn-line" href="https://parselex.app" rel="noopener">Parselex ↗</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="badge"><span class="dot"></span> In development · Built by the Parselex team</span>
+  <h1 style="margin-top:26px">Your case network,<br>invisible to the internet.</h1>
+  <p class="sub">LexZTNA is Zero-Trust Network Access for legal workloads: an encrypted
+  device-to-cloud mesh where every session is authenticated, every device is checked,
+  and access is granted per case — never per network.</p>
+  <div class="ctas">
+    <a class="btn btn-cyan" href="https://parselex.app" rel="noopener">Follow the build</a>
+    <a class="btn btn-ghost" href="https://docs.parselex.app" rel="noopener">Read the security docs</a>
+  </div>
+  <p class="note">No open ports · No flat network · No implicit trust</p>
+
+  <div class="mesh" aria-hidden="true">
+    <svg viewBox="0 0 1000 210" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ln" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#22D3EE" stop-opacity=".9"/><stop offset="1" stop-color="#2DD4BF" stop-opacity=".9"/>
+        </linearGradient>
+      </defs>
+      <g stroke="url(#ln)" stroke-width="1.1" opacity=".55">
+        <line x1="80" y1="50" x2="500" y2="105"/><line x1="80" y1="120" x2="500" y2="105"/>
+        <line x1="80" y1="180" x2="500" y2="105"/><line x1="180" y1="35" x2="500" y2="105"/>
+        <line x1="500" y1="105" x2="830" y2="45"/><line x1="500" y1="105" x2="850" y2="110"/>
+        <line x1="500" y1="105" x2="820" y2="175"/>
+      </g>
+      <g fill="#0B1220" stroke="#22D3EE" stroke-width="1.4">
+        <rect x="56" y="36" width="48" height="28" rx="6"/><rect x="56" y="106" width="48" height="28" rx="6"/>
+        <rect x="56" y="166" width="48" height="28" rx="6"/><rect x="156" y="21" width="48" height="28" rx="6"/>
+        <rect x="770" y="31" width="120" height="30" rx="7"/><rect x="790" y="95" width="120" height="30" rx="7"/>
+        <rect x="760" y="160" width="120" height="30" rx="7"/>
+      </g>
+      <circle cx="500" cy="105" r="26" fill="#13203C" stroke="#2DD4BF" stroke-width="1.6"/>
+      <circle cx="500" cy="105" r="5" fill="#2DD4BF"/>
+      <g fill="#8FA3BF" font-size="11" font-family="Inter,system-ui,sans-serif">
+        <text x="80" y="95">laptop</text><text x="80" y="152">phone</text><text x="80" y="210" opacity="0">.</text>
+        <text x="164" y="14">partner</text><text x="782" y="25">case vault</text>
+        <text x="812" y="89">mcp hub</text><text x="790" y="155">case files</text>
+      </g>
+      <g fill="#E8EEF7" font-size="11.5" font-family="Inter,system-ui,sans-serif" font-weight="600">
+        <text x="474" y="100">zero-trust</text><text x="474" y="114">mesh</text>
+      </g>
+    </svg>
+    <div class="cap">Every device · every session · authenticated and encrypted end to end</div>
+  </div>
+</div></header>
+
+<section id="pillars"><div class="wrap">
+  <div class="head"><p class="kicker">Product pillars</p>
+  <h2>Six controls, one principle:<br>trust nothing by default.</h2></div>
+  <div class="grid3">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6l7-3z"/></svg></div>
+      <h3>Zero-trust mesh</h3><p>No flat network and no VPN perimeter. Each connection is authenticated,
+      authorized and encrypted — the mesh is invisible to anyone who is not part of a case.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+      <h3>Encrypted tunnels</h3><p>Device-to-cloud encryption on every link. Case traffic never
+      travels in the clear and never mixes with other tenants' traffic.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></div>
+      <h3>SSO / MFA + device posture</h3><p>Sign-in through your identity provider with MFA. Posture
+      checks run continuously — a device that falls out of compliance loses access mid-session.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5z"/></svg></div>
+      <h3>DNS-layer DLP</h3><p>Filtering and data-loss prevention enforced at the DNS layer:
+      risky destinations are blocked before a connection is even established.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="6" r="3"/><circle cx="17" cy="18" r="3"/><path d="M9.8 10.8L14.2 7.4M9.8 13.2l4.4 3.4"/></svg></div>
+      <h3>Least-privilege, per case</h3><p>Network grants mirror case membership. When a lawyer
+      leaves a matter, the network path to it closes automatically.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 18a4 4 0 010-8 5.5 5.5 0 0110.7-1.6A4.5 4.5 0 0117 18H6z"/></svg></div>
+      <h3>Global edge</h3><p>Served from Cloudflare's edge network — short tunnels, low latency,
+      and no case data exposed to the public internet.</p></div>
+  </div>
+</div></section>
+
+<section id="how" style="background:var(--deep)"><div class="wrap">
+  <div class="head"><p class="kicker">How it works</p><h2>Three steps from install to invisible.</h2></div>
+  <div class="steps">
+    <div class="step"><h3>Enroll the device</h3><p>The LexZTNA client joins the mesh and receives a
+    device identity. Nothing is reachable yet — the network is silent by default.</p></div>
+    <div class="step"><h3>Authenticate with posture</h3><p>SSO with MFA verifies the person; posture
+    checks verify the device. Both must pass, and both are re-evaluated continuously.</p></div>
+    <div class="step"><h3>Work, per case</h3><p>The user sees only the resources their active cases
+    grant: the case vault, the workspace, the hub. Everything else does not exist for them.</p></div>
+  </div>
+</div></section>
+
+<section id="platform"><div class="wrap">
+  <div class="head"><p class="kicker">Platform context</p><h2>The network layer of the Parselex platform.</h2>
+  <p class="lead">LexZTNA wraps the Parselex legal stack — LexRegister case intelligence, per-case
+  document workspaces and the multi-agent MCP Hub — in a zero-trust network fabric. The applications
+  enforce what may be seen; LexZTNA enforces where the network can even look.</p></div>
+  <div class="grid2">
+    <div class="card"><h3>Built alongside production casework</h3><p>The Parselex platform runs live legal
+    workloads today, with 2,309 automated checks per release and per-case document isolation. LexZTNA
+    extends that same discipline from the application layer down to the network layer.</p></div>
+    <div class="card"><h3>Security first, in the open</h3><p>Security architecture and benchmark
+    documentation for the Parselex platform are public. LexZTNA design notes follow the same path:
+    published, reviewed and verifiable.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="band">
+    <h2>Following the zero-trust build.</h2>
+    <p>LexZTNA is in active development. Watch the roadmap and security notes on the Parselex
+    platform site — or try the live product family today.</p>
+    <div class="ctas">
+      <a class="btn btn-cyan" href="https://parselex.app" rel="noopener">parselex.app</a>
+      <a class="btn btn-ghost" href="https://docs.parselex.app" rel="noopener">docs.parselex.app</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <span>© 2026 Parselex · LexZTNA</span>
+    <span class="sp">
+      <a href="https://parselex.app" rel="noopener">Parselex platform</a>
+      <a href="https://docs.parselex.app" rel="noopener">Docs</a>
+      <a href="https://docs.parselex.app/legal/" rel="noopener">Legal</a>
+      <a href="https://www.linkedin.com/company/parselex" rel="noopener">LinkedIn</a>
+    </span>
+  </div>
+</div></footer>
+
+</body></html>

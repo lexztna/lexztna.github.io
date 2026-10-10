@@ -1,0 +1,85 @@
+# =============================================================================
+# Deploy lexztna.com landing to GitHub Pages
+# =============================================================================
+# The landing is a set of self-contained static HTML pages (inline CSS/JS,
+# zero external resources, zero images). Committed directly — no build step.
+#
+# One-time repo setup (Settings → Pages): Source = "GitHub Actions".
+# Custom domain comes from the CNAME file (lexztna.com); DNS is wired in
+# Cloudflare: apex A/AAAA → GitHub Pages, www CNAME → lexztna.github.io
+# (all DNS-only), mirroring the parselex.app setup.
+#
+# Trigger: push to main + manual workflow_dispatch
+# Output:  https://lexztna.com  (via Cloudflare DNS → GitHub Pages)
+# =============================================================================
+
+name: Deploy LexZTNA Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "404.html"
+      - "robots.txt"
+      - "sitemap.xml"
+      - "CNAME"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Verify and package site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify artifact integrity
+        run: |
+          set -euo pipefail
+          # Core pages exist and are non-empty
+          for p in index.html 404.html robots.txt sitemap.xml CNAME; do
+            test -s "$p" || { echo "MISSING or EMPTY: $p"; exit 1; }
+          done
+          # SEO basics
+          grep -q '<link rel="canonical" href="https://lexztna.com/">' index.html
+          grep -q 'Sitemap: https://lexztna.com/sitemap.xml' robots.txt
+          grep -q '<loc>https://lexztna.com/</loc>' sitemap.xml
+          # Self-contained: no external img/script/iframe sources
+          if grep -nE '<(img|script|iframe)[^>]+src="https?://' index.html 404.html; then
+            echo "External resource found — site must stay self-contained"; exit 1
+          fi
+          # Political neutrality: no country references
+          if grep -niE 'made in|ukrain|russi' index.html 404.html; then
+            echo "Country reference found — keep branding politically neutral"; exit 1
+          fi
+          # Custom domain marker
+          test "$(cat CNAME)" = "lexztna.com"
+          echo "artifact OK"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
